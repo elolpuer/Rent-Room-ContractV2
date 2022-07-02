@@ -1,26 +1,20 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.13;
 
-contract Rent {
-    mapping(uint => uint) keys;
-    mapping(uint => uint) deposit;
-    struct Room  {
-        uint ID;
-        address payable Owner;
-        address payable RentOwner;
-        uint TimeDeal;
-        uint TimeRentEnded;
-        string Name;
-        string Description;
-        uint Price;
-        bool Rented;
-    }
-    Room[] rooms;
+import "./storage/RentStorage.sol";
+import "./interfaces/IProperty.sol";
+import "./interfaces/IRent.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-    constructor() payable {}
+contract Rent is Initializable, RentStorage, IRent {
 
     fallback() external payable{}
     receive() external payable{}
+
+    function initialize(address _property) public initializer {
+      property = IProperty(_property);
+      // require(property.owner() == msg.sender, "Rent: Different owners");
+    }
 
     //Чтобы посмотреть баланс смари контракта, тут все депозиты
     function getBalance() public view returns(uint){
@@ -30,13 +24,6 @@ contract Rent {
     function getAnotherBalance(address _addr) public view returns(uint) {
         return _addr.balance;
     }
-
-    event SellRoom (address payable _owner, uint _price);
-    event RentRoom (address payable _owner, address payable _rentOwner, uint _id,uint _timeDeal, uint _timeRentEnded,uint _price);
-    event CloseRoomOwnerForever(address payable _owner, uint _id);
-    event CloseRoomRenter(uint _id);
-    event CloseRoomOwnerFromThisRenter(address payable _owner, uint _id);
-    event ChangeKey(uint _id);
 
     ///Выставляем комнату/квартиру для аренды
     function sellRoom(string memory _name, string memory _description, uint _key, uint _price) public payable {

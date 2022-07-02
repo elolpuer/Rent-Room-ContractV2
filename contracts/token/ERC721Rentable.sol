@@ -3,21 +3,9 @@ pragma solidity 0.8.13;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+import "./Rentable.sol";
 
-contract ERC721Rentable is ERC721Upgradeable, OwnableUpgradeable {
-    using Counters for Counters.Counter;
-    Counters.Counter private tokenIds;
-
-    mapping(address => uint256) userRentAmount;
-
-    struct RentedToken {
-      uint256 tokenId;
-      bool isRent;
-      address renter;
-    }
-
-    RentedToken[] rentedTokens;
+contract ERC721Rentable is ERC721Upgradeable, OwnableUpgradeable, Rentable {
 
     event ApproveRent();
     event DisapproveRent();
@@ -37,15 +25,14 @@ contract ERC721Rentable is ERC721Upgradeable, OwnableUpgradeable {
     }
 
     function approveRent(address to, uint256 tokenId) public isRented(tokenId) {
-      require(_isApprovedOrOwner(to, tokenId), "ERC721: transfer caller is not owner nor approved");
-      emit ApproveRent();
+        require(_isApprovedOrOwner(to, tokenId), "ERC721: transfer caller is not owner nor approved");
+        emit ApproveRent();
     }
 
     function disapproveRent(address to, uint256 tokenId) public {
         require(_isApprovedOrOwner(to, tokenId), "ERC721: transfer caller is not owner nor approved");
         emit DisapproveRent();
     }
-
     /**
      * @dev See {IERC721-transferFrom}.
      */
@@ -90,11 +77,6 @@ contract ERC721Rentable is ERC721Upgradeable, OwnableUpgradeable {
         }
       }
       return (false, 0);
-    }
-
-    function mint(address to) public onlyOwner {
-      tokenIds.increment();
-      _mint(to, tokenIds.current());
     }
 
 }
