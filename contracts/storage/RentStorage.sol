@@ -7,6 +7,9 @@ import "../interfaces/IProperty.sol";
 contract RentStorage {
   using Counters for Counters.Counter;
 
+  uint256 public commision = 100; //0.01%
+  uint256 public contractEarned;
+
   struct Property {
       uint256 tokenID;
       address owner;

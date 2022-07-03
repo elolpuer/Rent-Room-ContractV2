@@ -13,10 +13,10 @@ interface IRent {
     uint timeDeal,
     uint timeToRent
   );
-
-  event CloseRoomOwnerForever(address payable _owner, uint _id);
-  event CloseRoomRenter(uint _id);
-  event CloseRoomOwnerFromThisRenter(address payable _owner, uint _id);
-  event ChangeKey(uint _id);
+  event EndRent(uint256 id, uint256 time);
+  event ChangeDeposit(uint256 id, uint256 newDeposit);
+  event ChangePropertyPrice(uint256 id, uint256 newPrice);
+  event ChangePropertyMinTimeToRent(uint256 id, uint256 newMinTimeToRent);
+  event ChangePropertyMaxTimeToRent(uint256 id, uint256 newMaxTimeToRent);
 
 }
