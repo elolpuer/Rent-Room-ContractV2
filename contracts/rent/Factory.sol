@@ -16,7 +16,7 @@ contract Factory is Initializable, RentStorage, IRent {
       // require(property.owner() == msg.sender, "Rent: Different owners");
     }
 
-    modifier isRented(uint256 propertyID) {
+    modifier isPropertyRented(uint256 propertyID) {
       require(properties[propertyID].rented == false, "Factory: Property is rented");
       _;
     }
@@ -27,7 +27,7 @@ contract Factory is Initializable, RentStorage, IRent {
     }
 
     //create property with basic config and mint token
-    function createProperty(uint256 price) public {
+    function createProperty() public {
       uint256 id = property.mint(msg.sender);
       properties.push(
         Property(
@@ -35,22 +35,26 @@ contract Factory is Initializable, RentStorage, IRent {
           msg.sender, //Owner
           address(0), //Renter
           0,          //Time Deal
-          0,          //Time Rent Will End
-          price,      //Price
-          false       //Rented
+          0,          //timeToRent
+          0,          //minTimeToRent
+          0,          //maxTimeToRent
+          0,          //Price
+          0,          //Deposit
+          false,      //Rented
+          false       //On market
         )
       );
-      emit CreateProperty(msg.sender, price, properties.length - 1);
+      emit CreateProperty(msg.sender, properties.length - 1);
     }
 
-    function deleteProperty(uint256 propertyID) public isRented(propertyID) isPropertyOwner(propertyID) {
-      uint256 tokenId = properties[propertyID].id;
+    function deleteProperty(uint256 propertyID) public isPropertyRented(propertyID) isPropertyOwner(propertyID) {
+      uint256 tokenId = properties[propertyID].tokenID;
       delete properties[propertyID];
       property.burn(tokenId, msg.sender);
       emit DeleteProperty(msg.sender, propertyID);
     }
 
-    function getAllUserProperty(address user) public returns(Property[] memory){
+    function getAllUserProperty(address user) public returns(Property[] memory) {
       Property[] memory _userProperty = new Property[](property.userPropertyAmount(user));
       for (uint256 i = 0; i < properties.length; i++) {
         if (properties[i].owner == user) {
@@ -60,18 +64,6 @@ contract Factory is Initializable, RentStorage, IRent {
       return _userProperty;
     }
 
-    // ///Выставляем комнату/квартиру для аренды
-    // function sellRoom(string memory _name, string memory _description, uint _key, uint _price) public payable {
-    //     require(_price != 0 && _key != 0, "Key and price can't be equal 0");
-    //     keys[rooms.length] = _key;
-    //     rooms.push(Room(rooms.length, payable(msg.sender), payable(address(0)), 0, 0, _name, _description, _price, false));
-    //     emit SellRoom(payable(msg.sender), _price);
-    // }
-    //
-    // //Все комнаты/квартиры
-    // function getAllRooms() public view returns(Room[] memory _rooms){
-    //     _rooms = rooms;
-    // }
     //
     // //Арендуем комнату/квартиру
     // function rentRoom (uint _id) public payable {

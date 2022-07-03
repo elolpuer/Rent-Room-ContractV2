@@ -5,20 +5,26 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "../interfaces/IProperty.sol";
 
 contract RentStorage {
-  
-  mapping(uint => uint) public keys;
-  mapping(uint => uint) public deposit;
+  using Counters for Counters.Counter;
+
   struct Property {
-      uint id;
+      uint256 tokenID;
       address owner;
       address renter;
-      uint timeDeal;
-      uint timeRentWillEnd;
-      uint price;
+      uint256 timeDeal;         //deal time - when renter rented property
+      uint256 timeToRent;       //time to rent for example renter choosed 30 days he will own this property
+      uint256 minTimeToRent;    //in mls /* for example min = 30 days
+      uint256 maxTimeToRent;    //in mls                max = 364 days*/
+      uint256 price;            //per day
+      uint256 deposit;          //deposit for unfortunate situations
       bool rented;
+      bool onMarket;
   }
   Property[] public properties;
 
   IProperty internal property;
+
+  mapping(address => uint256) public renterPropertyAmount;
+  Counters.Counter public propertyOnMarket;
 
 }
