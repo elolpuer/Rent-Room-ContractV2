@@ -5,21 +5,19 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "../interfaces/IProperty.sol";
 
 contract RentStorage {
-
+  
   mapping(uint => uint) public keys;
   mapping(uint => uint) public deposit;
-  struct Room  {
-      uint ID;
-      address payable Owner;
-      address payable RentOwner;
-      uint TimeDeal;
-      uint TimeRentEnded;
-      string Name;
-      string Description;
-      uint Price;
-      bool Rented;
+  struct Property {
+      uint id;
+      address owner;
+      address renter;
+      uint timeDeal;
+      uint timeRentWillEnd;
+      uint price;
+      bool rented;
   }
-  Room[] internal rooms;
+  Property[] public properties;
 
   IProperty internal property;
 

@@ -2,19 +2,159 @@
   "manifestVersion": "3.2",
   "admin": {
     "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-    "txHash": "0xe05b4df629c61151662b93beb20dd3b92ddb2dc0bf69ee7d925d092bee13411b"
+    "txHash": "0x3ed11a6544bc66e96667ca2f80391216215125ee21b819bea1b3dc50be7f3183"
   },
   "proxies": [
     {
       "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0x0891792a697f7304551b8dc11328b71682a0743dfab0f74105772340f18fa821",
+      "txHash": "0xd7dee416f2c250a06a725cb3866ef8f7c668c545ec9d17bffcaf7f9f7926434b",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+      "txHash": "0x83dbaf598366d21b8093dbb1de519c32fcde9fc6bec8bf267d5ba8e56577924c",
       "kind": "transparent"
     }
   ],
   "impls": {
-    "c0c13dbd6a02fa80a1ef0ce66f8acaa1e34f9f375fecacd2a1b557d8fe67e9d0": {
+    "0a4f176d6379aa7d2cf356ab8ef8e446937b18b7fba2b51073a04f629887e386": {
+      "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      "txHash": "0xad93e927e245f74349f90e43e29a7073b4b44a6b91092e462e07055d87335202",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:62",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:67"
+          },
+          {
+            "label": "keys",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "RentStorage",
+            "src": "contracts/storage/RentStorage.sol:9"
+          },
+          {
+            "label": "deposit",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "RentStorage",
+            "src": "contracts/storage/RentStorage.sol:10"
+          },
+          {
+            "label": "properties",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_array(t_struct(Property)789_storage)dyn_storage",
+            "contract": "RentStorage",
+            "src": "contracts/storage/RentStorage.sol:20"
+          },
+          {
+            "label": "property",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_contract(IProperty)494",
+            "contract": "RentStorage",
+            "src": "contracts/storage/RentStorage.sol:22"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_struct(Property)789_storage)dyn_storage": {
+            "label": "struct RentStorage.Property[]",
+            "numberOfBytes": "32"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_contract(IProperty)494": {
+            "label": "contract IProperty",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Property)789_storage": {
+            "label": "struct RentStorage.Property",
+            "members": [
+              {
+                "label": "id",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "renter",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "timeDeal",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "timeRentWillEnd",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "price",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "rented",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "6"
+              }
+            ],
+            "numberOfBytes": "224"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          }
+        }
+      }
+    },
+    "9b8579722112c404269366a7667af6ef5abeceb25b6e4e076283d60075a18d11": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0x6e340eaa2b80158870801da5cffb66e75fe993e7249bb42f23e13dbb3cd6867b",
+      "txHash": "0xeae4abd70fefead6b6aa669ec9e07d1341160c969bd9f59655d3d62b5c4f5c2f",
       "layout": {
         "storage": [
           {
@@ -123,28 +263,36 @@
             "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:87"
           },
           {
-            "label": "tokenIds",
+            "label": "rentAddress",
             "offset": 0,
             "slot": "201",
-            "type": "t_struct(Counter)3211_storage",
-            "contract": "ERC721Rentable",
-            "src": "contracts/ERC721Rentable/ERC721Rentable.sol:10"
+            "type": "t_address",
+            "contract": "TokenStorage",
+            "src": "contracts/storage/TokenStorage.sol:10"
           },
           {
-            "label": "userRentAmount",
+            "label": "userPropertyAmount",
             "offset": 0,
             "slot": "202",
             "type": "t_mapping(t_address,t_uint256)",
-            "contract": "ERC721Rentable",
-            "src": "contracts/ERC721Rentable/ERC721Rentable.sol:12"
+            "contract": "TokenStorage",
+            "src": "contracts/storage/TokenStorage.sol:12"
           },
           {
             "label": "rentedTokens",
             "offset": 0,
             "slot": "203",
-            "type": "t_array(t_struct(RentedToken)3545_storage)dyn_storage",
-            "contract": "ERC721Rentable",
-            "src": "contracts/ERC721Rentable/ERC721Rentable.sol:20"
+            "type": "t_array(t_struct(RentedToken)2349_storage)dyn_storage",
+            "contract": "TokenStorage",
+            "src": "contracts/storage/TokenStorage.sol:19"
+          },
+          {
+            "label": "tokenIds",
+            "offset": 0,
+            "slot": "204",
+            "type": "t_struct(Counter)1867_storage",
+            "contract": "TokenStorage",
+            "src": "contracts/storage/TokenStorage.sol:21"
           }
         ],
         "types": {
@@ -152,8 +300,8 @@
             "label": "address",
             "numberOfBytes": "20"
           },
-          "t_array(t_struct(RentedToken)3545_storage)dyn_storage": {
-            "label": "struct ERC721Rentable.RentedToken[]",
+          "t_array(t_struct(RentedToken)2349_storage)dyn_storage": {
+            "label": "struct TokenStorage.RentedToken[]",
             "numberOfBytes": "32"
           },
           "t_array(t_uint256)44_storage": {
@@ -192,7 +340,7 @@
             "label": "string",
             "numberOfBytes": "32"
           },
-          "t_struct(Counter)3211_storage": {
+          "t_struct(Counter)1867_storage": {
             "label": "struct Counters.Counter",
             "members": [
               {
@@ -204,8 +352,8 @@
             ],
             "numberOfBytes": "32"
           },
-          "t_struct(RentedToken)3545_storage": {
-            "label": "struct ERC721Rentable.RentedToken",
+          "t_struct(RentedToken)2349_storage": {
+            "label": "struct TokenStorage.RentedToken",
             "members": [
               {
                 "label": "tokenId",

@@ -2,13 +2,14 @@
 pragma solidity 0.8.13;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "../interfaces/IProperty.sol";
 
-contract TokenStorage {
+abstract contract TokenStorage is IProperty {
   using Counters for Counters.Counter;
 
-  address internal rentAddress;
+  address public rentAddress;
 
-  mapping(address => uint256) public userRentAmount;
+  mapping(address => uint256) public userPropertyAmount;
 
   struct RentedToken {
     uint256 tokenId;
@@ -18,6 +19,5 @@ contract TokenStorage {
   RentedToken[] rentedTokens;
 
   Counters.Counter internal tokenIds;
-
 
 }
