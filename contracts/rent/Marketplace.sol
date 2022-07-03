@@ -5,8 +5,11 @@ import "./Factory.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
-contract Marketplace is Factory, ReentrancyGuardUpgradeable {
+abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
   using Counters for Counters.Counter;
+
+  fallback() external payable{}
+  receive() external payable{}
 
   modifier isPropertyOnMarket(uint256 propertyID) {
     require(properties[propertyID].onMarket == false, "Marketplace: Already on market");

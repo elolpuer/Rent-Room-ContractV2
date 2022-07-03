@@ -6,13 +6,26 @@ import "../interfaces/IProperty.sol";
 import "../interfaces/IRent.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-contract Factory is Initializable, RentStorage, IRent {
-
-    fallback() external payable{}
-    receive() external payable{}
+abstract contract Factory is Initializable, RentStorage {
 
     function initialize(address _property) public initializer {
       property = IProperty(_property);
+      properties.push(
+        Property(
+          0,         //ID
+          address(0), //Owner
+          address(0), //Renter
+          0,          //Time Deal
+          0,          //timeToRent
+          0,          //minTimeToRent
+          0,          //maxTimeToRent
+          0,          //Price
+          0,          //Deposit
+          false,      //Rented
+          false       //On market
+        )
+      );
+      commision = 100; //0.01%
       // require(property.owner() == msg.sender, "Rent: Different owners");
     }
 
@@ -62,6 +75,10 @@ contract Factory is Initializable, RentStorage, IRent {
         }
       }
       return _userProperty;
+    }
+
+    function getProperty(uint256 propertyID) public view returns(Property memory) {
+      return properties[propertyID];
     }
 
     //

@@ -8,11 +8,6 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract Property is ERC721Rentable {
   using Counters for Counters.Counter;
 
-  //setting rent contract to give mint/burn permission
-  function setRentAddress(address rent) external onlyOwner {
-    setRent(rent);
-  }
-
   function mint(address to) external onlyRent returns(uint256) {
     tokenIds.increment();
     uint256 current = tokenIds.current();

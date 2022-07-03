@@ -21,13 +21,11 @@ describe("Property Creation", function () {
 
   it("Should mint property as erc721", async () => {
     //create property on rent contract
-    await rent.createProperty(
-      ethers.utils.parseEther("1")
-    )
+    await rent.createProperty()
     //check property owner on rent contract
     assert.equal(
       signer.address,
-      (await rent.properties("0")).owner,
+      (await rent.properties("1")).owner,
       "Property Creation: signer not owner or property was not creat"
     )
     //check if property exist on property contract
@@ -40,13 +38,13 @@ describe("Property Creation", function () {
   it("Should delete property", async () => {
     //delete property on rent contract
     await rent.deleteProperty(
-      "0" //Property id on array
+      "1" //Property id on array
     )
 
     //check property on rent contract set to zero
     assert.equal(
       "0x0000000000000000000000000000000000000000",
-      (await rent.properties("0")).owner,
+      (await rent.properties("1")).owner,
       "Property Delete: property was not delete"
     )
 
