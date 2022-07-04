@@ -11,8 +11,13 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
   fallback() external payable{}
   receive() external payable{}
 
-  modifier isPropertyOnMarket(uint256 propertyID) {
+  modifier isPropertyNotOnMarket(uint256 propertyID) {
     require(properties[propertyID].onMarket == false, "Marketplace: Already on market");
+    _;
+  }
+
+  modifier isPropertyOnMarket(uint256 propertyID) {
+    require(properties[propertyID].onMarket == true, "Marketplace: Property not on market");
     _;
   }
 
@@ -30,7 +35,7 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
   )
     public
     isPropertyOwner(propertyID)
-    isPropertyOnMarket(propertyID)
+    isPropertyNotOnMarket(propertyID)
   {
     properties[propertyID].onMarket = true;
     properties[propertyID].minTimeToRent = minTimeToRent;
@@ -98,8 +103,8 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
   )
     public
     isPropertyOwner(propertyID)
-    isPropertyOnMarket(propertyID)
     isPropertyRented(propertyID)
+    isPropertyOnMarket(propertyID)
   {
     properties[propertyID].onMarket = false;
     propertyOnMarket.decrement();
@@ -122,7 +127,7 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
       "Marketplace: Time to Rent is not ok"
     );
     //price per one day * amount of days + deposit
-    uint256 allValueToSend = _costForRent(propertyID) + properties[propertyID].deposit;
+    uint256 allValueToSend = cost(propertyID, timeToRent);
     require(allValueToSend == msg.value, "Marketplace: Not enough value for rent");
     _rent(propertyID, timeToRent, msg.sender);
     emit RentProperty(
@@ -133,11 +138,17 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
     );
   }
 
+  function cost(uint256 propertyID, uint256 timeToRent) public view returns(uint256) {
+    return properties[propertyID].price * (timeToRent / 1 days) + properties[propertyID].deposit;
+  }
+
   function _rent(uint256 propertyID, uint256 timeToRent, address renter) private {
+    property.approveRent(renter, propertyID);
     properties[propertyID].timeDeal = block.timestamp;
     properties[propertyID].renter = renter;
     properties[propertyID].timeToRent = timeToRent;
     properties[propertyID].rented = true;
+    renterPropertyAmount[renter] += 1;
   }
 
   //for end incentives we lock value and deposit in contract
@@ -170,17 +181,20 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
   }
 
   function _endRent(uint256 propertyID) private {
-    uint256 contractCommision = _costForRent(propertyID) * commision / 1*10**6;
+    uint256 contractCommision = _costForRent(propertyID) * commision / 1000000;
     contractEarned += contractCommision;
     uint256 earnedAmount = _costForRent(propertyID) - contractCommision;
     (bool success, ) = properties[propertyID].owner.call{value: earnedAmount}("");
     require(success, "Marketplace: not success sending earnedAmount");
     (bool success2, ) = properties[propertyID].renter.call{value: properties[propertyID].deposit}("");
     require(success2, "Marketplace: not success sending deposit");
+    address renter = properties[propertyID].renter;
     properties[propertyID].renter = address(0);
     properties[propertyID].timeDeal = 0;
     properties[propertyID].timeToRent = 0;
     properties[propertyID].rented = false;
+    renterPropertyAmount[renter] -= 1;
+    property.disapproveRent(renter, propertyID);
     emit EndRent(propertyID, block.timestamp);
   }
 
@@ -190,9 +204,11 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
 
   function getAllRenterProperties(address user) public view returns(Property[] memory) {
     Property[] memory _renterProperty = new Property[](renterPropertyAmount[user]);
+    uint counter = 0;
     for (uint256 i = 0; i < properties.length; i++) {
       if (properties[i].renter == user && properties[i].rented == true) {
-        _renterProperty[i] = properties[i];
+        _renterProperty[counter] = properties[i];
+        counter++;
       }
     }
     return _renterProperty;
@@ -200,9 +216,11 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
 
   function getAllPropertiesOnMarket() public view returns(Property[] memory) {
     Property[] memory _propertyOnMarket = new Property[](propertyOnMarket.current());
+    uint counter = 0;
     for (uint256 i = 0; i < properties.length; i++) {
       if (properties[i].onMarket == true) {
-        _propertyOnMarket[i] = properties[i];
+        _propertyOnMarket[counter] = properties[i];
+        counter++;
       }
     }
     return _propertyOnMarket;

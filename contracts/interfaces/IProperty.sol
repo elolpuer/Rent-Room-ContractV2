@@ -12,6 +12,8 @@ interface IProperty {
   function mint(address to) external returns(uint256);
   function burn(uint256 tokenId, address from) external;
   function userPropertyAmount(address user) external returns(uint256);
+  function approveRent(address to, uint256 tokenId) external;
+  function disapproveRent(address from, uint256 tokenId) external;
   // function owner() external view returns(address);
 
 }

@@ -2,24 +2,89 @@
   "manifestVersion": "3.2",
   "admin": {
     "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-    "txHash": "0x34f3871ca70012216d2312917a0fea656ec1cad9070b412bba2c62cb7b2e1f92"
+    "txHash": "0x1d95ae325b9b2308ee9ce8c75f8095be2cfd2fc847f1b9c9ec2e38cf8127c47d"
   },
   "proxies": [
     {
+      "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+      "txHash": "0x8c36442812a0289cd4935b5649eef34ee66f1bddb617bfbe6eb989ef591cbac6",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+      "txHash": "0x7a7b099832a2848ce9d047e9646a1bb5392b74e43682e521ceb66c4891b6f83c",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e",
+      "txHash": "0x24ea0b5d986575c762e85af6b2abfa630937285a1a034b8a0263c2119ab9ff01",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+      "txHash": "0x3b8e75a123d1951ac1076b56d067bcb5b51886bde39e67c480ceb5049442c558",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x68B1D87F95878fE05B998F19b66F4baba5De1aed",
+      "txHash": "0x3da1787bb3548b927c3f4918c8d8481de317f8d405eafbf18e92b5dd5fd542b6",
+      "kind": "transparent"
+    },
+    {
       "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-      "txHash": "0x8b59e6d83eff8c583167306270904fd2c340ad18d94ed57fccc9b5a7ed3f8c1b",
+      "txHash": "0xc38de6fa83e200010b98355bd2f1af40cde75f2f6807b9abe4fc82b449af959a",
       "kind": "transparent"
     },
     {
       "address": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-      "txHash": "0x2373355edd7f3d48d9deae06dcfb474fadb2fc24be4ba7691c6f211ea3fffdd4",
+      "txHash": "0x031beb65788a9c47a088305252ab17650a465f4798c55e6dafd50449ac488946",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
+      "txHash": "0xace458d0bd02cafc97d3ec91a964401235036dd0814f8be35ce6120610bc1638",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318",
+      "txHash": "0x2e31cac617b4209b239c00f82b5c53d4d61566f29c9080f17de740334e4dd0c3",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x0B306BF915C4d645ff596e518fAf3F9669b97016",
+      "txHash": "0x31c41d649043e79660f0a637bc0d0e47a90f7d2e20624ed6efa612c5226c7bd3",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1",
+      "txHash": "0xc6ff98209790601820c2efc26ee4d5b585618bfd751ce57b86d6dd8e90ae50f9",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1",
+      "txHash": "0x8ccee6f82d6670c194b9dbae9c645ebbe2aab175093296c67d4cd24e43bb2380",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x322813Fd9A801c5507c9de605d63CEA4f2CE6c44",
+      "txHash": "0xc350b2ac11983f18604c201ae7e9491fc2f408192cafcbd3239c8da0dbf0d837",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690",
+      "txHash": "0x9cb414524694416167015bcdcd672ee3317424558a7492584e7733e86964229d",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB",
+      "txHash": "0x2be7f7326c9050f7b2bfa929a623af410e2b4526aae0bbaa8aba163e0cdaceac",
       "kind": "transparent"
     }
   ],
   "impls": {
-    "7923a0c63cc8e567fa3d4cc88c12e41dcbf66658a3b7774b3f9668c4237b5670": {
+    "7e436c55a9a377a2002e067895d70854ed17082bc3419b77465f9f8ef2029c95": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0x5aefbb99ccbaec0bbd94b9f9a94f5c031d0a5c8aff1be7105f29278cbf7d7d1f",
+      "txHash": "0xa9ecbdd02a86302c0b7bb710f0616f5f1da6a10a553e8fa8aa95a6a9a2634b99",
       "layout": {
         "storage": [
           {
@@ -131,7 +196,7 @@
             "label": "rent",
             "offset": 0,
             "slot": "201",
-            "type": "t_contract(IRent)2063",
+            "type": "t_contract(IRent)2077",
             "contract": "TokenStorage",
             "src": "contracts/storage/TokenStorage.sol:12"
           },
@@ -181,7 +246,7 @@
             "label": "bool",
             "numberOfBytes": "1"
           },
-          "t_contract(IRent)2063": {
+          "t_contract(IRent)2077": {
             "label": "contract IRent",
             "numberOfBytes": "20"
           },
@@ -228,9 +293,9 @@
         }
       }
     },
-    "d245a4023ba943874ac6825313010367f6de9a9fd386975e88c9bbdedb2f36db": {
+    "c2c1367b0f1e428b1f306a81f65c91c6e83d25a9aacf000d1cb09d8353782e6e": {
       "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
-      "txHash": "0x284b256965163d82e672513180d8900e173180e0e42d40abe5276d6ff99f361d",
+      "txHash": "0xaa4d7451d4f4a5d27430413474f9376a67cc85f6e8697bc5e084092d44505dc6",
       "layout": {
         "storage": [
           {
@@ -270,7 +335,7 @@
             "label": "properties",
             "offset": 0,
             "slot": "3",
-            "type": "t_array(t_struct(Property)1613_storage)dyn_storage",
+            "type": "t_array(t_struct(Property)1707_storage)dyn_storage",
             "contract": "RentStorage",
             "src": "contracts/storage/RentStorage.sol:14"
           },
@@ -278,7 +343,7 @@
             "label": "property",
             "offset": 0,
             "slot": "4",
-            "type": "t_contract(IProperty)565",
+            "type": "t_contract(IProperty)579",
             "contract": "RentStorage",
             "src": "contracts/storage/RentStorage.sol:16"
           },
@@ -320,7 +385,7 @@
             "label": "address",
             "numberOfBytes": "20"
           },
-          "t_array(t_struct(Property)1613_storage)dyn_storage": {
+          "t_array(t_struct(Property)1707_storage)dyn_storage": {
             "label": "struct Common.Property[]",
             "numberOfBytes": "32"
           },
@@ -332,7 +397,7 @@
             "label": "bool",
             "numberOfBytes": "1"
           },
-          "t_contract(IProperty)565": {
+          "t_contract(IProperty)579": {
             "label": "contract IProperty",
             "numberOfBytes": "20"
           },
@@ -352,7 +417,7 @@
             ],
             "numberOfBytes": "32"
           },
-          "t_struct(Property)1613_storage": {
+          "t_struct(Property)1707_storage": {
             "label": "struct Common.Property",
             "members": [
               {

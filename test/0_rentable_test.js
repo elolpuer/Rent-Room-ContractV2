@@ -43,7 +43,7 @@ describe("Property Creation", function () {
 
     //check property on rent contract set to zero
     assert.equal(
-      "0x0000000000000000000000000000000000000000",
+      ethers.constants.AddressZero,
       (await rent.properties("1")).owner,
       "Property Delete: property was not delete"
     )
