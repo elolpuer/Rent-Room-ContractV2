@@ -142,7 +142,7 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
     return properties[propertyID].price * (timeToRent / 1 days) + properties[propertyID].deposit;
   }
 
-  function _rent(uint256 propertyID, uint256 timeToRent, address renter) private {
+  function _rent(uint256 propertyID, uint256 timeToRent, address renter) internal {
     property.approveRent(renter, propertyID);
     properties[propertyID].timeDeal = block.timestamp;
     properties[propertyID].renter = renter;
@@ -180,7 +180,7 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
     _endRent(propertyID);
   }
 
-  function _endRent(uint256 propertyID) private {
+  function _endRent(uint256 propertyID) internal {
     uint256 contractCommision = _costForRent(propertyID) * commision / 1000000;
     contractEarned += contractCommision;
     uint256 earnedAmount = _costForRent(propertyID) - contractCommision;
@@ -198,7 +198,7 @@ abstract contract Marketplace is Factory, ReentrancyGuardUpgradeable {
     emit EndRent(propertyID, block.timestamp);
   }
 
-  function _costForRent(uint256 propertyID) private view returns(uint256) {
+  function _costForRent(uint256 propertyID) internal view returns(uint256) {
     return properties[propertyID].price * (properties[propertyID].timeToRent / 1 days);
   }
 
